@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowDownToLine, Leaf, Star, ArrowRight, Shield, 
-  Clock, Award, Users, QrCode, Smartphone, Github, Layout
+  Clock, Award, Users, QrCode, Smartphone, Github, Layout,
+  Bell, Search, Zap, Folder, ShoppingBag, FileText, User, Home, Wallet
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import QRCode from "react-qr-code";
@@ -158,95 +159,151 @@ export default function App() {
                     <div className="absolute top-1.5 left-1/2 -translate-x-1/2 bg-slate-950 w-28 h-5 rounded-full z-45" />
 
                     {/* Phone Header Mock */}
-                    <div className="px-4 py-2 bg-white border-b border-gray-100 flex items-center justify-between text-[11px] font-bold text-gray-800 z-40">
-                      <div className="flex items-center gap-1">
-                        <span className="text-green-600 text-xs">🥬 Sayurku</span>
+                    <div className="px-3.5 py-3 bg-white flex items-center justify-between text-gray-800 z-40 relative pt-7 pb-2">
+                      <div>
+                        <p className="text-[7px] text-gray-500 font-medium">Selamat Malam 🌙</p>
+                        <h4 className="text-[10px] font-bold text-gray-900 tracking-tight">Halo, Pengguna!</h4>
                       </div>
-                      <span className="text-[9px] text-gray-400 font-mono">09:41</span>
+                      <div className="w-6 h-6 rounded-full border border-gray-150 flex items-center justify-center text-gray-600 bg-white shadow-sm">
+                        <Bell className="w-3 h-3" />
+                      </div>
                     </div>
 
                     {/* App Content inside mockup */}
-                    <div className="flex-1 p-3.5 space-y-3.5 overflow-hidden">
+                    <div className="flex-1 overflow-y-auto overflow-x-hidden bg-[#fafafa] pb-4 space-y-3.5 text-left">
                       {/* Search Bar placeholder */}
-                      <div className="bg-white border border-gray-100 rounded-full px-3 py-1.5 flex items-center gap-2 text-[10px] text-gray-400">
-                        <span>🔍 Telusuri Jeruk Lemon, Brokoli...</span>
+                      <div className="px-3.5 pt-1">
+                        <div className="bg-white rounded-xl px-3 py-2 flex items-center gap-1.5 text-[9px] text-gray-400 border border-gray-100 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">
+                          <Search className="w-3 h-3 text-gray-400" />
+                          <span>Cari sayur segar hari ini...</span>
+                        </div>
                       </div>
 
                       {/* Promo Banner inside mock screen */}
-                      <div className="bg-gradient-to-r from-green-50 to-green-100 p-3 rounded-2xl border border-green-100/50 flex justify-between items-center relative overflow-hidden">
-                        <div className="space-y-0.5 relative z-10">
-                          <span className="bg-green-600 text-white text-[7px] font-bold px-1.5 py-0.5 rounded-full">FLASH PROMO</span>
-                          <h4 className="font-extrabold text-[11px] text-green-950">Voucher Diskon</h4>
-                          <p className="text-[8px] text-green-800">Potongan Ongkir Rp 10.000</p>
-                        </div>
-                        <span className="text-3xl select-none relative z-10 leading-none">🥭</span>
-                      </div>
-
-                      {/* Mini List categories */}
-                      <div className="flex gap-2">
-                        {["🥬 Sayuran", "🍓 Buah", "🧅 Bumbu"].map((c, i) => (
-                          <span key={i} className={`px-2 py-0.5 rounded-full text-[9px] font-semibold ${i === 0 ? "bg-green-600 text-white" : "bg-white text-gray-500 border border-gray-100"}`}>
-                            {c}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Miniature Grid of products */}
-                      <div className="grid grid-cols-2 gap-2.5">
-                        {[
-                          { name: "Brokoli Premium", price: "9.500", rating: "4.9", image: "🥦" },
-                          { name: "Stroberi Organik", price: "18.000", rating: "4.8", image: "🍓" }
-                        ].map((m, idx) => (
-                          <div key={idx} className="bg-white p-2.5 rounded-xl border border-gray-100 space-y-1.5 flex flex-col justify-between">
-                            <span className="text-2xl text-center select-none">{m.image}</span>
-                            <div>
-                              <h5 className="font-bold text-[9px] text-gray-800 line-clamp-1">{m.name}</h5>
-                              <p className="text-[8px] text-gray-400">Rp {m.price}/pax</p>
-                            </div>
-                            <div className="flex justify-between items-center text-[8px] text-gray-500">
-                              <span className="text-amber-500">★ {m.rating}</span>
-                              <span className="bg-green-50 text-green-600 px-1 py-0.5 rounded font-extrabold">Beli</span>
-                            </div>
+                      <div className="px-3.5">
+                        <div className="bg-[#186fcf] p-3 rounded-2xl flex justify-between items-center relative overflow-hidden text-white shadow-sm h-24">
+                          <div className="space-y-1.5 relative z-10 w-[70%]">
+                            <span className="bg-white/20 backdrop-blur-sm text-white text-[6px] font-bold px-1.5 py-0.5 rounded-full inline-flex items-center gap-0.5"><Zap className="w-2 h-2 fill-yellow-400 text-yellow-400" /> Kenapa SayurKu?</span>
+                            <h4 className="font-bold text-[11px] leading-tight text-white mt-1">100% Sayur<br/>Organik Pilihan</h4>
+                            <p className="text-[6.5px] text-blue-100 leading-snug pr-2">Bebas pestisida, dipilih langsung dari mitra petani terpercaya</p>
                           </div>
-                        ))}
+                          <span className="text-4xl select-none relative z-10 leading-none">🌱</span>
+                        </div>
+                        <div className="flex justify-center gap-1 mt-2">
+                          <div className="w-3 h-1 bg-[#185c34] rounded-full"></div>
+                          <div className="w-1 h-1 bg-green-200 rounded-full"></div>
+                          <div className="w-1 h-1 bg-green-200 rounded-full"></div>
+                        </div>
+                      </div>
+
+                      {/* Kategori Section */}
+                      <div className="px-3.5">
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="font-bold text-[10px] text-gray-900 flex items-center gap-1"><Folder className="w-3 h-3 text-amber-400 fill-amber-400" /> Kategori</h4>
+                          <span className="text-[7px] font-bold text-[#185c34]">Lihat Semua</span>
+                        </div>
+                        <div className="grid grid-cols-4 gap-1.5">
+                          {[
+                            { name: "Sayur Hijau", icon: "🥬", color: "bg-green-50/50" },
+                            { name: "Buah", icon: "🍎", color: "bg-orange-50/50" },
+                            { name: "Bumbu", icon: "🌶️", color: "bg-red-50/50" },
+                            { name: "Umbi", icon: "🥔", color: "bg-purple-50/50" }
+                          ].map((c, i) => (
+                            <div key={i} className="flex flex-col items-center bg-white rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.02)] border border-gray-50 p-2 gap-1.5">
+                              <div className={`w-8 h-8 rounded-lg ${c.color} flex items-center justify-center text-[16px]`}>{c.icon}</div>
+                              <span className="text-[6px] font-bold text-gray-700 text-center leading-tight whitespace-nowrap">{c.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Produk Terlaris */}
+                      <div className="px-3.5">
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="font-bold text-[10px] text-gray-900 flex items-center gap-1">🔥 Produk Terlaris</h4>
+                          <span className="text-[7px] font-bold text-[#185c34]">Lihat Semua</span>
+                        </div>
+                        <div className="flex gap-2 pb-2 overflow-hidden">
+                          {[
+                            { name: "Timun", price: "5.000", sold: "79", img: "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=200&q=80", rank: 1 },
+                            { name: "Brokoli", price: "35.000", sold: "6", img: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=200&q=80", rank: 2 },
+                            { name: "Wortel", price: "10.500", sold: "0", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=200&q=80", rank: 3 }
+                          ].map((p, idx) => (
+                            <div key={idx} className="bg-white rounded-[10px] shadow-[0_2px_4px_rgba(0,0,0,0.02)] border border-gray-100 overflow-hidden w-[90px] relative pb-2 flex-shrink-0">
+                              <div className="absolute top-1 left-1 bg-amber-400 text-amber-950 text-[6px] font-bold px-1 rounded-sm flex items-center gap-0.5 z-10 opacity-90 backdrop-blur-sm">#{p.rank} 🏆</div>
+                              <div className="h-14 w-full bg-gray-100 relative">
+                                <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                              </div>
+                              <div className="px-2 mt-1.5 space-y-0.5">
+                                <h5 className="font-bold text-[8px] text-gray-900">{p.name}</h5>
+                                <p className="text-[6px] text-gray-400">{p.sold} Terjual</p>
+                                <div className="flex justify-between items-center mt-1">
+                                  <span className="font-bold text-[8px] text-[#185c34]">Rp {p.price}</span>
+                                  <div className="w-4 h-4 bg-[#185c34] rounded-md text-white flex items-center justify-center text-[10px] font-bold cursor-pointer hover:bg-[#124527]">+</div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
 
                     </div>
 
                     {/* Mini Bottom Tab navigator */}
-                    <div className="bg-white border-t border-gray-100 py-2.5 flex justify-around text-[8px] text-gray-400 font-bold shrink-0">
-                      <span className="text-green-600 flex flex-col items-center">🏠<span>Mulai</span></span>
-                      <span className="flex flex-col items-center">🔍<span>Cari</span></span>
-                      <span className="flex flex-col items-center">👛<span>Dompet</span></span>
-                      <span className="flex flex-col items-center">📦<span>Pesanan</span></span>
+                    <div className="bg-white border-t border-gray-100 py-2 flex justify-around text-[6px] text-gray-400 font-bold shrink-0 relative z-50">
+                      <span className="text-[#185c34] flex flex-col items-center gap-0.5"><Home className="w-3.5 h-3.5" />Beranda</span>
+                      <span className="flex flex-col items-center gap-0.5"><FileText className="w-3.5 h-3.5" />Pesanan</span>
+                      <span className="flex flex-col items-center gap-0.5"><Wallet className="w-3.5 h-3.5" />Dompet</span>
+                      <span className="flex flex-col items-center gap-0.5"><Bell className="w-3.5 h-3.5" />Notifikasi</span>
+                      <span className="flex flex-col items-center gap-0.5"><User className="w-3.5 h-3.5" />Profil</span>
+                      
+                      {/* Floating Cart Button */}
+                      <div className="absolute -top-7 right-3 w-9 h-9 bg-[#185c34] rounded-xl flex items-center justify-center shadow-lg shadow-green-900/20 border-[2.5px] border-white text-white z-50 cursor-pointer">
+                        <ShoppingBag className="w-4 h-4" />
+                      </div>
                     </div>
 
                     {/* Simulated screen indicator bar */}
-                    <div className="w-16 h-1 bg-gray-200 rounded-full mx-auto my-1.5 shrink-0" />
+                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-200 rounded-full z-50" />
                   </div>
                 </div>
 
                 {/* High quality floating interactive vector decorations */}
                 <motion.div
+                  drag
+                  dragConstraints={{ top: -100, bottom: 100, left: -100, right: 100 }}
+                  dragElastic={0.5}
+                  whileHover={{ scale: 1.1 }}
+                  whileDrag={{ scale: 1.2, rotate: 10, zIndex: 50, cursor: "grabbing" }}
                   animate={{ y: [0, -8, 0] }}
                   transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-                  className="absolute -top-6 -left-6 w-14 h-14 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center text-2xl select-none z-20"
+                  className="absolute -top-6 -left-6 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center text-2xl select-none z-20 cursor-grab active:cursor-grabbing"
                 >
                   🥬
                 </motion.div>
 
                 <motion.div
+                  drag
+                  dragConstraints={{ top: -100, bottom: 100, left: -100, right: 100 }}
+                  dragElastic={0.5}
+                  whileHover={{ scale: 1.1 }}
+                  whileDrag={{ scale: 1.2, rotate: -10, zIndex: 50, cursor: "grabbing" }}
                   animate={{ y: [0, 8, 0] }}
                   transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                  className="absolute bottom-16 -right-6 w-14 h-14 bg-white rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center text-3xl select-none z-20"
+                  className="absolute bottom-16 -right-6 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-100 flex items-center justify-center text-3xl select-none z-20 cursor-grab active:cursor-grabbing"
                 >
                   🥑
                 </motion.div>
 
                 <motion.div
+                  drag
+                  dragConstraints={{ top: -100, bottom: 100, left: -100, right: 100 }}
+                  dragElastic={0.5}
+                  whileHover={{ scale: 1.1 }}
+                  whileDrag={{ scale: 1.2, rotate: 15, zIndex: 50, cursor: "grabbing" }}
                   animate={{ scale: [1, 1.05, 1], rotate: [0, 5, 0] }}
                   transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                  className="absolute top-1/2 -right-8 w-12 h-12 bg-white rounded-2xl shadow-md border border-slate-100 flex items-center justify-center text-2xl select-none z-20"
+                  className="absolute top-1/2 -right-8 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-2xl shadow-md border border-slate-100 flex items-center justify-center text-2xl select-none z-20 cursor-grab active:cursor-grabbing"
                 >
                   🍅
                 </motion.div>
