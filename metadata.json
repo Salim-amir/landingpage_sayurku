@@ -1,0 +1,6 @@
+{
+  "name": "Sayurku",
+  "description": "Landing page modern, elegan, dan minimalis untuk aplikasi mobile Sayurku, platform belanja sayur segar dan kebutuhan dapur.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
