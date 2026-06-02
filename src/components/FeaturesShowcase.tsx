@@ -3,18 +3,20 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Search, ShoppingCart, Wallet, Truck, 
   CheckCircle2, Bell, Sparkles, Plus, 
-  ArrowRight, CreditCard, RefreshCw, X, ShieldCheck
+  ArrowRight, CreditCard, RefreshCw, X, ShieldCheck, ArrowLeft, Home, FileText, User
 } from "lucide-react";
 import { Product } from "../types";
 
 // Mock products for the interactive shopping preview
 const SAMPLE_PRODUCTS: Product[] = [
-  { id: "1", name: "Bayam Organik", category: "sayur", price: 6500, unit: "ikat", image: "🥬", rating: 4.8, isFresh: true },
-  { id: "2", name: "Wortel Manis Berastagi", category: "sayur", price: 9000, unit: "500g", image: "🥕", rating: 4.9, isFresh: true },
-  { id: "3", name: "Tomat Merah Segar", category: "sayur", price: 8000, unit: "500g", image: "🍅", rating: 4.7, isFresh: false },
-  { id: "4", name: "Alpukat Mentega Jumbo", category: "buah", price: 23000, unit: "1kg", image: "🥑", rating: 4.9, isFresh: true },
-  { id: "5", name: "Bawang Putih Kating", category: "bumbu", price: 12000, unit: "250g", image: "🧄", rating: 4.6, isFresh: false },
-  { id: "6", name: "Cabai Rawit Merah", category: "bumbu", price: 14000, unit: "200g", image: "🌶️", rating: 4.8, isFresh: true },
+  { id: "1", name: "Bayam Hijau", category: "sayur_hijau", price: 12000, unit: "250g", image: "🥬", rating: 4.8, isFresh: true },
+  { id: "1b", name: "Kangkung Segar", category: "sayur_hijau", price: 10000, unit: "250g", image: "🥬", rating: 4.6, isFresh: true },
+  { id: "2", name: "Tomat Merah", category: "buah", price: 15000, unit: "500g", image: "🍅", rating: 4.7, isFresh: true },
+  { id: "2b", name: "Jeruk Manis", category: "buah", price: 25000, unit: "1kg", image: "🍊", rating: 4.9, isFresh: true },
+  { id: "3", name: "Cabai Rawit", category: "bumbu", price: 18000, unit: "100g", image: "🌶️", rating: 4.8, isFresh: true },
+  { id: "3b", name: "Bawang Merah", category: "bumbu", price: 35000, unit: "500g", image: "🧅", rating: 4.7, isFresh: true },
+  { id: "4", name: "Wortel Lokal", category: "umbi_umbian", price: 10500, unit: "500g", image: "🥕", rating: 4.9, isFresh: true },
+  { id: "4b", name: "Kentang Dieng", category: "umbi_umbian", price: 16000, unit: "1kg", image: "🥔", rating: 4.8, isFresh: true },
 ];
 
 export default function FeaturesShowcase() {
@@ -23,10 +25,10 @@ export default function FeaturesShowcase() {
   // Sub-states: Katalog & Belanja Mockup
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState<{ [productId: string]: number }>({});
-  const [categoryFilter, setCategoryFilter] = useState<"all" | "sayur" | "buah" | "bumbu">("all");
+  const [categoryFilter, setCategoryFilter] = useState<"all" | "sayur_hijau" | "buah" | "bumbu" | "umbi_umbian">("all");
 
   // Sub-states: Dompet Digital Mockup
-  const [walletBalance, setWalletBalance] = useState(35000);
+  const [walletBalance, setWalletBalance] = useState(9834000);
   const [topUpAmount, setTopUpAmount] = useState<number | null>(null);
   const [walletStep, setWalletStep] = useState<"main" | "pin" | "success">("main");
   const [pinCode, setPinCode] = useState<string>("");
@@ -245,10 +247,10 @@ export default function FeaturesShowcase() {
                     <Wallet className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-gray-950 tracking-tight">
-                    Dompet Digital "SayurPay"
+                    Dompet Digital
                   </h3>
                   <p className="text-gray-600 leading-relaxed font-normal">
-                    Metode pembayaran cashless dan super cepat yang sudah terintegrasi langsung di dalam aplikasi. Nikmati promo potongan ongkir dan diskon khusus setiap kali bertransaksi menggunakan SayurPay.
+                    Metode pembayaran cashless dan super cepat yang sudah terintegrasi langsung di dalam aplikasi. Nikmati promo potongan ongkir dan diskon khusus setiap kali bertransaksi menggunakan Dompet Digital.
                   </p>
                   <ul className="space-y-3.5 text-sm text-gray-700">
                     <li className="flex items-start gap-2.5">
@@ -353,382 +355,287 @@ export default function FeaturesShowcase() {
               </div>
 
               {/* In-Phone Screen Web Content */}
-              <div className="w-full h-full bg-slate-50 rounded-[35px] overflow-hidden flex flex-col relative pt-7 font-sans text-xs select-none">
+              <div className="w-full h-full bg-[#F8FAF7] rounded-[35px] overflow-hidden flex flex-col relative pt-7 font-sans text-xs select-none">
                 
                 {/* Header inside phone */}
-                <div className="px-4 py-2 border-b border-gray-100 flex items-center justify-between bg-white z-30">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-base font-extrabold tracking-tight text-green-600">Sayurku</span>
+                <div className="px-4 py-3 bg-[#F8FAF7] flex items-center justify-between z-30 pt-4">
+                  <div className="flex items-center gap-3">
+                    <ArrowLeft className="w-4 h-4 text-gray-800" />
+                    <span className="text-[13px] font-bold tracking-tight text-gray-900">
+                      {activeTab === "katalog" ? "Katalog Produk" : activeTab === "dompet" ? "Dompet Digital" : "Detail Pesanan"}
+                    </span>
                   </div>
-                  {/* Digital Clock & Signal Indicators */}
-                  <div className="flex items-center gap-2 text-[10px] text-gray-500 font-mono">
-                    <span>09:41</span>
-                    <span>🔋</span>
+                  {/* Battery & Signal (optional, just to make it look like a phone) */}
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <span className="text-[9px] font-medium font-mono">11:04</span>
                   </div>
                 </div>
 
-                {/* Main Inside Body (Scrollable or Static based on Mode) */}
-                <div className="flex-1 overflow-y-auto overflow-x-hidden p-3 space-y-3 flex flex-col">
+                {/* Main Inside Body */}
+                <div className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col relative">
                   
                   {/* KATALOG TAB UI */}
                   {activeTab === "katalog" && (
-                    <div className="space-y-3 flex-1 flex flex-col">
+                    <div className="flex-1 flex flex-col px-3 relative">
                       {/* Search Mockup */}
-                      <div className="relative">
+                      <div className="relative mt-1">
                         <input
                           type="text"
-                          placeholder="Cari sayur, buah, atau bumbu..."
+                          placeholder="Cari sayur segar hari ini..."
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
-                          className="w-full bg-white border border-gray-100 rounded-full pl-8 pr-8 py-2 text-[11px] focus:outline-none focus:ring-1 focus:ring-green-500 focus:bg-white text-gray-800 placeholder-gray-400"
+                          className="w-full bg-white border border-gray-200 rounded-xl pl-8 pr-4 py-2 text-[10px] focus:outline-none focus:ring-1 focus:ring-[#1D5C2E] text-gray-800 placeholder-gray-400 shadow-sm"
                         />
                         <Search className="w-3.5 h-3.5 text-gray-400 absolute left-3 top-2.5" />
-                        {searchQuery && (
-                          <button onClick={() => setSearchQuery("")} className="absolute right-3 top-2.5 text-gray-400">
-                            <X className="w-3.5 h-3.5" />
-                          </button>
-                        )}
                       </div>
 
-                      {/* Category filters inside phone */}
-                      <div className="flex gap-1.5 pb-1 overflow-x-auto scrollbar-none">
+                      {/* Category filters */}
+                      <div className="flex gap-2 pb-1 overflow-x-auto scrollbar-none mt-3">
                         {[
-                          { id: "all", label: "Semua" },
-                          { id: "sayur", label: "🥬 Sayur" },
-                          { id: "buah", label: "🥑 Buah" },
-                          { id: "bumbu", label: "🧄 Bumbu" },
-                        ].map((cat) => (
-                          <button
-                            key={cat.id}
-                            onClick={() => setCategoryFilter(cat.id as any)}
-                            className={`px-2.5 py-1 rounded-full text-[10px] font-medium whitespace-nowrap transition-colors cursor-pointer ${
-                              categoryFilter === cat.id
-                                ? "bg-green-600 text-white"
-                                : "bg-white text-gray-600 border border-gray-100"
-                            }`}
-                          >
-                            {cat.label}
-                          </button>
-                        ))}
+                          { id: "all", label: "Semua Produk" },
+                          { id: "sayur_hijau", label: "Sayur Hijau" },
+                          { id: "buah", label: "Buah" },
+                          { id: "bumbu", label: "Bumbu" },
+                          { id: "umbi_umbian", label: "Umbi-umbian" },
+                        ].map((cat) => {
+                          const isCatActive = categoryFilter === cat.id;
+                          return (
+                            <button
+                              key={cat.id}
+                              onClick={() => setCategoryFilter(cat.id as any)}
+                              className={`px-3 py-1.5 rounded-full text-[9px] font-bold whitespace-nowrap transition-colors cursor-pointer ${
+                                isCatActive
+                                  ? "bg-[#1D5C2E] text-white"
+                                  : "bg-white text-gray-700 border border-gray-200 shadow-sm"
+                              }`}
+                            >
+                              {cat.label}
+                            </button>
+                          );
+                        })}
                       </div>
 
                       {/* Product Grid Mockup */}
-                      <div className="grid grid-cols-2 gap-2 flex-1">
-                        {filteredProducts.length > 0 ? (
-                          filteredProducts.map((p) => {
-                            const inCart = (cart[p.id] || 0) as number;
-                            return (
-                              <div key={p.id} className="bg-white p-2 rounded-xl border border-gray-100 flex flex-col justify-between relative shadow-sm hover:border-green-100 transition-colors">
-                                {p.isFresh && (
-                                  <span className="absolute top-1 right-1 px-1 py-0.5 rounded bg-green-50 text-[8px] font-semibold text-green-700">Fresh</span>
-                                )}
-                                <div className="text-2xl mt-1 text-center select-none mb-1">{p.image}</div>
-                                <div>
-                                  <h4 className="font-semibold text-[10px] text-gray-800 line-clamp-1">{p.name}</h4>
-                                  <p className="text-[8px] text-gray-400">Rp {p.price.toLocaleString("id-ID")}/{p.unit}</p>
-                                </div>
-                                <button
-                                  id={`btn-beli-${p.id}`}
-                                  onClick={() => handleAddToCart(p.id)}
-                                  className="w-full mt-2 py-1 bg-green-50 hover:bg-green-100 text-green-700 rounded-lg text-[9px] font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer"
-                                >
-                                  {inCart > 0 ? (
-                                    <>
-                                      <Plus className="w-2.5 h-2.5" />
-                                      Tambah (+{inCart})
-                                    </>
-                                  ) : "Beli"}
-                                </button>
+                      <div className="grid grid-cols-2 gap-3 mt-3 pb-20 content-start">
+                        {filteredProducts.map((p) => {
+                          return (
+                            <div key={p.id} className="bg-white rounded-[16px] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col">
+                              <div className="h-[90px] w-full bg-gray-100 flex items-center justify-center text-5xl relative">
+                                {p.image}
                               </div>
-                            );
-                          })
-                        ) : (
-                          <div className="col-span-2 text-center py-6 text-gray-400">
-                            Produk saringan tidak ditemukan
-                          </div>
-                        )}
+                              <div className="p-2.5 flex flex-col justify-between flex-1">
+                                <div>
+                                  <h4 className="font-bold text-[10px] text-gray-900 leading-tight">{p.name}</h4>
+                                  <p className="text-[8px] text-gray-400 mt-0.5">/ {p.unit}</p>
+                                </div>
+                                <div className="flex items-center justify-between mt-2">
+                                  <span className="font-bold text-[#1D5C2E] text-[10px]">Rp {p.price.toLocaleString("id-ID")}</span>
+                                  <button
+                                    onClick={() => handleAddToCart(p.id)}
+                                    className="w-6 h-6 bg-[#1D5C2E] text-white rounded-[6px] flex items-center justify-center shadow-sm active:scale-95 transition-transform"
+                                  >
+                                    <Plus className="w-3.5 h-3.5" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
 
-                      {/* Sticky Active Cart Bar at bottom of simulator */}
-                      {totalCartCount > 0 && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 15 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="bg-green-600 p-2.5 rounded-xl text-white flex items-center justify-between shadow-lg mt-auto"
-                        >
-                          <div className="flex items-center gap-2">
-                            <div className="p-1.5 rounded-lg bg-green-700 relative">
-                              <ShoppingCart className="w-3 h-3 text-white" />
-                              <span className="absolute -top-1.5 -right-1.5 bg-yellow-400 text-[8px] text-green-950 font-bold rounded-full w-4 h-4 flex items-center justify-center scale-90">
-                                {totalCartCount}
-                              </span>
-                            </div>
-                            <div>
-                              <p className="text-[10px] font-bold">Keranjang Belanja</p>
-                              <p className="text-[8.5px] text-green-100">Rp {totalCartPrice.toLocaleString("id-ID")}</p>
-                            </div>
-                          </div>
-                          <button 
-                            onClick={clearCart} 
-                            className="bg-green-700 hover:bg-green-800 text-[8px] font-bold px-2 py-1 rounded-lg text-green-100 transition-colors cursor-pointer"
-                          >
-                            Reset
-                          </button>
-                        </motion.div>
-                      )}
+                      {/* Floating Action Button for Cart */}
+                      <div className="absolute bottom-20 right-3 z-40">
+                        <button className="w-11 h-11 bg-[#1D5C2E] rounded-2xl flex items-center justify-center text-white shadow-[0_4px_12px_rgba(29,92,46,0.4)] relative cursor-pointer active:scale-95 transition-transform">
+                          <ShoppingCart className="w-5 h-5" />
+                          {totalCartCount > 0 && (
+                            <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[8px] font-bold rounded-full w-4 h-4 flex items-center justify-center border-2 border-white box-content">
+                              {totalCartCount}
+                            </span>
+                          )}
+                        </button>
+                      </div>
                     </div>
                   )}
 
                   {/* DOMPET TAB UI */}
                   {activeTab === "dompet" && (
-                    <div className="space-y-3 flex-1 flex flex-col justify-between">
-                      <AnimatePresence mode="wait">
-                        {walletStep === "main" && (
-                          <motion.div
-                            key="wallet-main"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="space-y-4 flex-1"
-                          >
-                            {/* Card Display */}
-                            <div className="bg-gradient-to-br from-green-600 to-green-800 text-white p-4 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
-                              <div className="absolute right-0 bottom-0 bg-white/5 w-24 h-24 rounded-full translate-x-4 translate-y-4" />
-                              <div className="flex justify-between items-start">
-                                <span className="text-[10px] font-medium tracking-wide text-green-100">SAYURPAY BALANCE</span>
-                                <CreditCard className="w-4 h-4 text-green-200" />
-                              </div>
-                              <div className="space-y-0.5">
-                                <h3 className="text-lg font-bold">Rp {walletBalance.toLocaleString("id-ID")}</h3>
-                                <p className="text-[8px] text-green-100/80">Aktif • Amir Salim</p>
-                              </div>
-                            </div>
+                    <div className="space-y-4 flex-1 pb-20 px-3">
+                      {/* Card Display */}
+                      <div className="bg-[#1D5C2E] text-white p-4 rounded-[20px] shadow-lg relative overflow-hidden mt-1">
+                        <div className="flex items-center gap-1.5 mb-3 text-green-50">
+                          <Wallet className="w-3.5 h-3.5" />
+                          <span className="text-[10px] font-medium">Saldo Anda</span>
+                        </div>
+                        <h3 className="text-[22px] font-bold mb-4 tracking-tight">Rp {walletBalance.toLocaleString("id-ID")}</h3>
+                        <button className="w-full py-2.5 bg-white text-[#1D5C2E] rounded-xl text-[10px] font-bold flex items-center justify-center gap-1.5 cursor-pointer hover:bg-gray-50 transition-colors">
+                          <Plus className="w-3 h-3" /> Isi Saldo
+                        </button>
+                      </div>
 
-                            {/* Section: Quick Topup */}
-                            <div>
-                              <h4 className="font-bold text-gray-800 text-[10px] mb-2">Isi Saldo Cepat</h4>
-                              <div className="grid grid-cols-3 gap-2">
-                                {[15000, 50000, 100000].map((amount) => (
-                                  <button
-                                    key={amount}
-                                    onClick={() => initiateTopUp(amount)}
-                                    className="bg-white border hover:border-green-600 border-gray-100 rounded-xl p-2.5 text-center flex flex-col items-center justify-center gap-1 cursor-pointer transition-all hover:shadow-xs"
-                                  >
-                                    <span className="text-[9px] font-bold text-gray-800">+{amount >= 1000 ? `${amount / 1000}k` : amount}</span>
-                                    <span className="text-[8px] text-green-600">Pilih</span>
-                                  </button>
-                                ))}
+                      {/* Transaction History */}
+                      <div className="space-y-3 mt-4">
+                        <h4 className="font-bold text-gray-900 text-[12px]">Riwayat Transaksi</h4>
+                        
+                        <div className="space-y-2.5">
+                          {[
+                            { title: "Pembayaran", subtitle: "Pembayaran pesanan", amount: -585000, date: "2 Jun 2026, 00:11" },
+                            { title: "Pembayaran", subtitle: "Pembayaran pesanan", amount: -800000, date: "2 Jun 2026, 00:02" },
+                            { title: "Pembayaran", subtitle: "Pembayaran pesanan", amount: -5000, date: "1 Jun 2026, 22:24" },
+                            { title: "Isi Saldo", subtitle: "Pembayaran Virtual Account", amount: 200000, date: "1 Jun 2026, 20:10" },
+                          ].map((trx, idx) => (
+                            <div key={idx} className="bg-white p-3 rounded-2xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] flex items-center gap-3">
+                              <div className={`w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 ${trx.amount < 0 ? 'bg-red-50 text-red-500' : 'bg-green-50 text-[#1D5C2E]'}`}>
+                                <ArrowRight className={`w-4 h-4 ${trx.amount < 0 ? '-rotate-45' : 'rotate-45'}`} />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h5 className="font-bold text-[10px] text-gray-900">{trx.title}</h5>
+                                <p className="text-[8px] text-gray-400 mt-0.5">{trx.subtitle}</p>
+                                <p className="text-[8px] text-gray-400">{trx.date}</p>
+                              </div>
+                              <div className="text-right flex flex-col items-end justify-center">
+                                <p className={`font-bold text-[10px] ${trx.amount < 0 ? 'text-red-500' : 'text-[#1D5C2E]'}`}>
+                                  {trx.amount > 0 ? "+" : "-"}Rp {Math.abs(trx.amount).toLocaleString("id-ID")}
+                                </p>
+                                <div className="mt-1 px-1.5 py-0.5 bg-green-50 text-[#1D5C2E] text-[7px] font-bold rounded-md border border-green-100">
+                                  Sukses
+                                </div>
                               </div>
                             </div>
-
-                            {/* Promos slider */}
-                            <div className="bg-amber-50 rounded-2xl border border-amber-100 p-3 flex items-center gap-2.5">
-                              <span className="text-lg">⭐</span>
-                              <div>
-                                <h5 className="font-bold text-amber-900 text-[9px]">Promo Cashback 15%</h5>
-                                <p className="text-[8px] text-amber-700">Gunakan SayurPay untuk bayar minimal Rp 45.000</p>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {walletStep === "pin" && (
-                          <motion.div
-                            key="wallet-pin"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="space-y-4 flex-1 flex flex-col justify-center text-center"
-                          >
-                            <h4 className="font-bold text-gray-800 text-xs">Masukkan PIN SayurPay</h4>
-                            <p className="text-[9px] text-gray-500">Top-Up Sebesar: <span className="font-bold text-gray-800">Rp {topUpAmount?.toLocaleString("id-ID")}</span></p>
-                            
-                            {/* PIN Display bullet bubbles */}
-                            <div className="flex justify-center gap-2 py-3">
-                              {[0, 1, 2, 3, 4, 5].map((index) => {
-                                const isFilled = pinCode.length > index;
-                                return (
-                                  <div
-                                    key={index}
-                                    className={`w-3 h-3 rounded-full border transition-all duration-300 ${
-                                      isFilled ? "bg-green-600 border-green-600 scale-110" : "border-gray-200 bg-white"
-                                    }`}
-                                  />
-                                );
-                              })}
-                            </div>
-
-                            {isProcessingTopUp ? (
-                              <div className="py-4 flex flex-col items-center gap-2 justify-center">
-                                <RefreshCw className="w-5 h-5 text-green-600 animate-spin" />
-                                <span className="text-[9px] text-green-600 font-bold">Memverifikasi keamanan...</span>
-                              </div>
-                            ) : (
-                              /* PIN Keyboard Input inside app simulator */
-                              <div className="grid grid-cols-3 gap-2.5 max-w-[180px] mx-auto mt-2">
-                                {["1", "2", "3", "4", "5", "6", "7", "8", "9", "C", "0", "←"].map((keyChar) => (
-                                  <button
-                                    key={keyChar}
-                                    onClick={() => {
-                                      if (keyChar === "C") {
-                                        setPinCode("");
-                                      } else if (keyChar === "←") {
-                                        setPinCode(pinCode.slice(0, -1));
-                                      } else {
-                                        handlePinInput(keyChar);
-                                      }
-                                    }}
-                                    className="w-10 h-10 rounded-full bg-white border border-gray-100 hover:bg-green-50 hover:border-green-200 text-[10px] font-bold text-gray-800 flex items-center justify-center cursor-pointer active:scale-95 transition-all shadow-xs"
-                                  >
-                                    {keyChar}
-                                  </button>
-                                ))}
-                              </div>
-                            )}
-                          </motion.div>
-                        )}
-
-                        {walletStep === "success" && (
-                          <motion.div
-                            key="wallet-success"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            className="flex-1 flex flex-col items-center justify-center text-center space-y-4 py-8"
-                          >
-                            <div className="w-12 h-12 rounded-full bg-green-50 border border-green-100 flex items-center justify-center text-green-600 mb-2">
-                              <ShieldCheck className="w-6 h-6" />
-                            </div>
-                            <div>
-                              <h4 className="font-extrabold text-gray-900 text-xs text-center">Top-Up Berhasil!</h4>
-                              <p className="text-[9px] text-gray-500 mt-1 max-w-[160px] mx-auto">Saldo SayurPay Anda telah ditambahkan sebesar Rp {topUpAmount?.toLocaleString("id-ID")}.</p>
-                            </div>
-                            <button
-                              onClick={resetWalletMockup}
-                              className="px-4 py-1.5 bg-green-600 text-white rounded-full text-[9px] font-bold shadow-sm cursor-pointer hover:bg-green-700 transition"
-                            >
-                              Kembali ke Dompet
-                            </button>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   )}
 
                   {/* PESANAN TAB UI */}
                   {activeTab === "pesanan" && (
-                    <div className="space-y-4 flex-1 flex flex-col justify-between">
-                      {/* Live Status Map Preview illustration */}
-                      <div className="bg-slate-100 h-28 rounded-2xl relative overflow-hidden border border-slate-200/60 shadow-xs">
-                        {/* Simulated minimal vector map */}
-                        <div className="absolute inset-0 bg-[#e2e8f0]" />
-                        {/* Map Roads lines vector */}
-                        <div className="absolute top-1/2 left-0 right-0 h-4 bg-white -translate-y-1/2" />
-                        <div className="absolute left-1/3 top-0 bottom-0 w-4 bg-white" />
-                        <div className="absolute left-2/3 top-0 bottom-0 w-4 bg-white" />
-                        
-                        {/* Route Path Indicator Line */}
-                        <div className="absolute top-1/2 left-1/3 right-1/4 h-1.5 bg-green-400 -translate-y-1/2 rounded" />
-                        
-                        {/* Simulated Map Pins */}
-                        <div className="absolute top-[38%] left-[30%] bg-green-100 p-1 rounded-full border border-green-400 z-10 animate-pulse">
-                          🏢
+                    <div className="space-y-4 flex-1 pb-20 px-3 mt-1">
+                      
+                      {/* Status Pesanan */}
+                      <div className="bg-white p-3.5 rounded-2xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] space-y-3">
+                        <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+                          <span className="text-[10px] text-gray-600">Status Pesanan</span>
+                          <span className="px-2.5 py-1 bg-[#F8FAF7] text-[#1D5C2E] border border-green-100/50 text-[9px] font-bold rounded-lg">Selesai</span>
                         </div>
-                        
-                        {/* Animated delivery guy icon moving on path */}
-                        <motion.div
-                          animate={isSimulatingDelivery ? {
-                            left: orderStep === 1 ? "30%" : orderStep === 2 ? "55%" : "70%",
-                            top: orderStep === 1 ? "38%" : orderStep === 2 ? "38%" : "38%"
-                          } : { left: "30%", top: "38%" }}
-                          transition={{ duration: 1.5, type: "spring" }}
-                          className="absolute z-20 text-base"
-                        >
-                          🛵
-                        </motion.div>
-
-                        <div className="absolute top-[38%] right-[22%] bg-red-100 p-1 rounded-full border border-red-400 z-10 animate-bounce">
-                          📍
-                        </div>
-                      </div>
-
-                      {/* Timeline Steps simulation inside phone */}
-                      <div className="space-y-2 text-left">
-                        <div className="flex gap-2 items-center">
-                          <h4 className="font-bold text-gray-800 text-[10px]">Lacak Belanjaan Anda</h4>
-                          {isSimulatingDelivery && <span className="flex h-1.5 w-1.5 relative"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span></span>}
-                        </div>
-
-                        {/* Custom Progress Line */}
-                        <div className="relative">
-                          {/* Background indicator line */}
-                          <div className="absolute left-[7px] top-1 bottom-1 w-[2px] bg-gray-200" />
-                          <div className="absolute left-[7px] top-1 w-[2px] bg-green-500 transition-all duration-500" style={{ height: `${progressWidth}%` }} />
-
-                          <div className="space-y-3 relative z-11">
-                            {/* Step 1 */}
-                            <div className="flex gap-2">
-                              <div className={`w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 ${
-                                orderStep >= 1 ? "bg-green-600 text-white" : "bg-gray-200 text-gray-400"
-                              }`}>✓</div>
-                              <div>
-                                <p className={`text-[10px] font-bold ${orderStep >= 1 ? "text-gray-900" : "text-gray-400"}`}>Pesanan Diterima & Dikemas</p>
-                                <p className="text-[8px] text-gray-400">Tim Sayurku sedang memilah sayur segar.</p>
-                              </div>
-                            </div>
-
-                            {/* Step 2 */}
-                            <div className="flex gap-2">
-                              <div className={`w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 z-10 ${
-                                orderStep >= 2 ? "bg-green-600 text-white" : "bg-gray-200 text-gray-400"
-                              }`}>{orderStep > 2 ? "✓" : "2"}</div>
-                              <div>
-                                <p className={`text-[10px] font-bold ${orderStep >= 2 ? "text-gray-900" : "text-gray-400"}`}>Kurir Sedang Mengantar</p>
-                                <p className="text-[8px] text-gray-400">Pak Tasripin (Honda Revo Hitam, AB-3921-XW)</p>
-                              </div>
-                            </div>
-
-                            {/* Step 3 */}
-                            <div className="flex gap-2">
-                              <div className={`w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold shrink-0 z-10 ${
-                                orderStep >= 3 ? "bg-green-600 text-white" : "bg-gray-200 text-gray-400"
-                              }`}>3</div>
-                              <div>
-                                <p className={`text-[10px] font-bold ${orderStep >= 3 ? "text-gray-900" : "text-gray-400"}`}>Sampai di Meja Dapurmu</p>
-                                <p className="text-[8px] text-gray-400">Sayur bersih siap untuk dimasak.</p>
-                              </div>
-                            </div>
+                        <div className="space-y-2">
+                          <div className="flex justify-between text-[9px] text-gray-500">
+                            <span>Waktu Checkout</span><span className="font-medium">1 Jun 2026, 22:24</span>
+                          </div>
+                          <div className="flex justify-between text-[9px] text-gray-500">
+                            <span>Waktu Dikirim</span><span className="font-medium">1 Jun 2026, 23:58</span>
+                          </div>
+                          <div className="flex justify-between text-[9px] text-gray-500">
+                            <span>Waktu Selesai</span><span className="font-medium">1 Jun 2026, 23:58</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Trigger bottom simulation panel inside phone */}
-                      <button
-                        onClick={startDeliverySimulation}
-                        disabled={isSimulatingDelivery}
-                        className={`w-full py-2 ${
-                          isSimulatingDelivery ? "bg-slate-100 text-gray-400" : "bg-green-600 hover:bg-green-700 text-white cursor-pointer"
-                        } rounded-xl text-[10px] font-bold text-center transition-colors flex items-center justify-center gap-1.5`}
-                      >
-                        {isSimulatingDelivery ? (
-                          <>
-                            <RefreshCw className="w-3 h-3 animate-spin text-gray-400" />
-                            Dalam Perjalanan...
-                          </>
-                        ) : (
-                          <>
-                            <Truck className="w-3 h-3" />
-                            Simulasikan Pelacakan
-                          </>
-                        )}
-                      </button>
+                      {/* Daftar Produk */}
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-[11px] mb-2.5">Daftar Produk</h4>
+                        <div className="bg-white p-3 rounded-2xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] flex items-start gap-3">
+                          <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-2xl border border-gray-100">
+                            🥬
+                          </div>
+                          <div className="flex-1 mt-1">
+                            <div className="flex justify-between items-start">
+                              <h5 className="font-bold text-[10px] text-gray-900">Bayam Hijau</h5>
+                              <span className="font-bold text-[10px] text-gray-900">Rp 12.000</span>
+                            </div>
+                            <p className="text-[9px] text-gray-500 mt-1">1 x Rp 12.000</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Informasi Pengiriman */}
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-[11px] mb-2.5">Informasi Pengiriman</h4>
+                        <div className="bg-white p-3.5 rounded-2xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] space-y-3.5">
+                          <div className="flex items-start gap-2.5">
+                            <div className="mt-0.5"><div className="w-5 h-5 rounded-full bg-[#1D5C2E] flex items-center justify-center"><div className="w-1.5 h-1.5 bg-white rounded-full"></div></div></div>
+                            <div>
+                              <h6 className="text-[9px] text-gray-400">Alamat Tujuan</h6>
+                              <p className="text-[10px] text-gray-700 leading-relaxed mt-0.5 font-medium">jl.mawar, uhuhu, malang, 057378</p>
+                            </div>
+                          </div>
+                          <div className="border-t border-gray-100 pt-3.5 flex items-center justify-between">
+                            <div className="flex items-center gap-2.5">
+                              <div className="w-9 h-9 rounded-full bg-[#F8FAF7] flex items-center justify-center text-[#1D5C2E]">
+                                <Truck className="w-4 h-4" />
+                              </div>
+                              <div>
+                                <h6 className="text-[8px] text-gray-400">Kurir Pengantar</h6>
+                                <p className="font-bold text-[10px] text-gray-900">Yanto</p>
+                                <p className="text-[8px] text-gray-500">0850531316</p>
+                              </div>
+                            </div>
+                            <button className="px-3 py-2 bg-[#25D366] text-white rounded-lg text-[9px] font-bold flex items-center gap-1.5 shadow-sm">
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
+                              Chat WA
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Rincian Pembayaran */}
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-[11px] mb-2.5">Rincian Pembayaran</h4>
+                        <div className="bg-white p-3.5 rounded-2xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] space-y-3">
+                          <div className="flex justify-between text-[9px] border-b border-gray-100 pb-3">
+                            <span className="text-gray-500">Metode Pembayaran</span>
+                            <span className="font-bold text-gray-900">Dompet Digital</span>
+                          </div>
+                          <div className="flex justify-between text-[9px]">
+                            <span className="text-gray-500">Subtotal Produk</span>
+                            <span className="text-gray-900 font-medium">Rp 12.000</span>
+                          </div>
+                          <div className="flex justify-between text-[9px]">
+                            <span className="text-gray-500">Ongkos Kirim</span>
+                            <span className="text-gray-900 font-medium">Rp 0</span>
+                          </div>
+                          <div className="flex justify-between text-[11px] border-t border-gray-100 pt-3 mt-1">
+                            <span className="font-bold text-gray-900">Total Belanja</span>
+                            <span className="font-bold text-[#1D5C2E]">Rp 12.000</span>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   )}
 
                 </div>
 
+                {/* Static Bottom Navigation Bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-white border-t border-gray-100 flex items-center justify-around z-40 px-2 pb-1 shadow-[0_-4px_16px_rgba(0,0,0,0.03)]">
+                  {[
+                    { id: 'beranda', icon: Home, label: 'Beranda' },
+                    { id: 'pesanan', icon: FileText, label: 'Pesanan' },
+                    { id: 'dompet', icon: Wallet, label: 'Dompet' },
+                    { id: 'notifikasi', icon: Bell, label: 'Notifikasi' },
+                    { id: 'profil', icon: User, label: 'Profil' }
+                  ].map((item) => {
+                    const isActive = 
+                      (activeTab === 'katalog' && item.id === 'beranda') ||
+                      (activeTab === 'pesanan' && item.id === 'pesanan') ||
+                      (activeTab === 'dompet' && item.id === 'dompet');
+                    
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.id} className="flex flex-col items-center gap-1 cursor-pointer w-12"
+                        onClick={() => {
+                          if (item.id === 'beranda') setActiveTab('katalog');
+                          if (item.id === 'pesanan') setActiveTab('pesanan');
+                          if (item.id === 'dompet') setActiveTab('dompet');
+                        }}>
+                        <Icon className={`w-5 h-5 ${isActive ? 'text-[#1D5C2E]' : 'text-gray-400'}`} />
+                        <span className={`text-[8px] ${isActive ? 'font-bold text-[#1D5C2E]' : 'font-medium text-gray-400'}`}>{item.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+
                 {/* Home Indicator line of simulated mobile phone screen */}
-                <div className="w-24 h-1 bg-gray-300 rounded-full mx-auto my-1.5 shrink-0" />
+                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-24 h-1 bg-gray-300 rounded-full z-50" />
               </div>
             </div>
           </div>

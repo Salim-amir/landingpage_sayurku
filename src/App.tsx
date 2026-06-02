@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowDownToLine, Leaf, Star, ArrowRight, Shield, 
-  Clock, Award, Users, QrCode, Smartphone 
+  Clock, Award, Users, QrCode, Smartphone, Github, Layout
 } from "lucide-react";
 import Navbar from "./components/Navbar";
+import QRCode from "react-qr-code";
 import Typewriter from "./components/Typewriter";
 import FeaturesShowcase from "./components/FeaturesShowcase";
 import HowItWorks from "./components/HowItWorks";
@@ -135,52 +136,7 @@ export default function App() {
                 </a>
               </motion.div>
 
-              {/* Social Proof / Ratings */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ duration: 0.5, delay: 0.35 }}
-                className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 border-t border-gray-150/40 text-left"
-              >
-                {/* Stars feedback */}
-                <div className="flex items-center gap-2">
-                  <div className="flex text-amber-500">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-4 h-4 fill-amber-500" />
-                    ))}
-                  </div>
-                  <div>
-                    <span className="font-extrabold text-sm text-gray-950">4.9 / 5.0</span>
-                    <span className="text-xs text-gray-500 block">Rating dari Toko Aplikasi</span>
-                  </div>
-                </div>
 
-                {/* Vertical Divider */}
-                <span className="hidden sm:inline w-[1px] h-8 bg-gray-200" />
-
-                {/* Users trust indicators */}
-                <div className="flex items-center gap-3">
-                  <div className="flex -space-x-2.5">
-                    {[
-                      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80",
-                      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80",
-                      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=80&q=80"
-                    ].map((avatarUrl, idx) => (
-                      <img
-                        key={idx}
-                        src={avatarUrl}
-                        alt="Pengguna Sayurku"
-                        className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-xs"
-                        referrerPolicy="no-referrer"
-                      />
-                    ))}
-                  </div>
-                  <div>
-                    <span className="font-extrabold text-sm text-gray-950">50.000+</span>
-                    <span className="text-xs text-gray-500 block">Pengguna Sehat Aktif</span>
-                  </div>
-                </div>
-              </motion.div>
             </div>
 
             {/* Hero Right Visuals - Phone Mockup and Floating Greens */}
@@ -355,32 +311,34 @@ export default function App() {
                   Nikmati Mudahnya Belanja Kesegaran Dari Genggaman
                 </h2>
                 <p className="text-sm md:text-base text-green-105 leading-relaxed font-normal">
-                  Download aplikasi Sayurku sekarang juga untuk mengklaim voucher gratis ongkir belanja perdanamu, gratis isi saldo SayurPay Rp 20.000, dan ratusan promo bumbu dapur spesial harian lainnya!
+                  Jelajahi purwarupa (prototype) aplikasi Sayurku sekarang juga. Anda dapat mencoba navigasi interaktif, fitur pencarian pintar, dan merasakan pengalaman belanja sayur yang modern!
                 </p>
 
                 {/* Simulated Download button options */}
                 <div className="flex flex-wrap gap-4 pt-2">
-                  {/* Google Play store simulation button link */}
+                  {/* Web Demo simulation button link */}
                   <a
-                    href="#"
+                    href="#fitur"
                     className="flex items-center gap-3 bg-slate-900 border border-slate-800 hover:bg-slate-850 px-5 py-3 rounded-2xl transition-all cursor-pointer shadow-sm text-left font-sans"
                   >
-                    <Smartphone className="w-6 h-6 text-white shrink-0" />
+                    <Layout className="w-6 h-6 text-white shrink-0" />
                     <div>
-                      <span className="block text-[9px] text-gray-400 font-medium uppercase tracking-wider">GET IT ON</span>
-                      <span className="block text-xs font-bold text-white">Google Play</span>
+                      <span className="block text-[9px] text-gray-400 font-medium uppercase tracking-wider">COBA SEKARANG</span>
+                      <span className="block text-xs font-bold text-white">Demo Web App</span>
                     </div>
                   </a>
 
-                  {/* App store simulation button link */}
+                  {/* Github link */}
                   <a
-                    href="#"
+                    href="https://github.com/Salim-amir/landingpage_sayurku"
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3 bg-slate-900 border border-slate-800 hover:bg-slate-850 px-5 py-3 rounded-2xl transition-all cursor-pointer shadow-sm text-left font-sans"
                   >
-                    <Smartphone className="w-6 h-6 text-white shrink-0" />
+                    <Github className="w-6 h-6 text-white shrink-0" />
                     <div>
-                      <span className="block text-[9px] text-gray-400 font-medium uppercase tracking-wider">DOWNLOAD ON THE</span>
-                      <span className="block text-xs font-bold text-white">App Store</span>
+                      <span className="block text-[9px] text-gray-400 font-medium uppercase tracking-wider">LIHAT KODE</span>
+                      <span className="block text-xs font-bold text-white">Repository</span>
                     </div>
                   </a>
                 </div>
@@ -389,12 +347,16 @@ export default function App() {
               {/* Graphic right download scanner */}
               <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
                 <div className="bg-white p-6 rounded-3xl text-gray-900 shadow-xl border border-green-100 max-w-xs space-y-4">
-                  <div className="flex items-center justify-center p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                    <QrCode className="w-40 h-40 text-slate-850" />
+                  <div className="flex items-center justify-center p-3 bg-white rounded-2xl border border-slate-200">
+                    <QRCode 
+                      value={typeof window !== 'undefined' ? window.location.href : "https://github.com/Salim-amir/landingpage_sayurku"} 
+                      size={160} 
+                      className="text-slate-900"
+                    />
                   </div>
                   <div className="text-center">
                     <h4 className="font-bold text-sm text-gray-950">Pindai Kode QR</h4>
-                    <p className="text-[10px] text-gray-500 mt-0.5">Arahkan kamera smartphone Anda ke layar untuk mengunduh aplikasi terverifikasi Sayurku.</p>
+                    <p className="text-[10px] text-gray-500 mt-0.5">Arahkan kamera smartphone Anda ke layar untuk mencoba versi mobile web Sayurku.</p>
                   </div>
                 </div>
               </div>

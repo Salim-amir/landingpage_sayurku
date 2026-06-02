@@ -12,7 +12,7 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     id: "2",
     question: "Bagaimana cara melakukan pembayaran di Sayurku?",
-    answer: "Kami mendukung metode pembayaran cashless cepat menggunakan dompet digital internal 'SayurPay', Virtual Account bank utama (BCA, Mandiri, BRI, BNI), QRIS, kartu kredit, hingga metode bayar di tempat (Cash on Delivery) untuk kenyamanan belanja Anda.",
+    answer: "Kami mendukung metode pembayaran menggunakan dompet digital dan metode bayar di tempat (Cash on Delivery) untuk kenyamanan belanja Anda.",
   },
   {
     id: "3",

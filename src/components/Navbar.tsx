@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, ArrowDownToLine, Leaf } from "lucide-react";
+import { Menu, X, Layout, Leaf } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -100,11 +100,11 @@ export default function Navbar() {
           {/* Call-to-Action Download Button */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="#download"
+              href="#fitur"
               className="px-5 py-2.5 bg-green-900 shadow-sm hover:bg-green-800 text-white rounded-full text-sm font-semibold flex items-center gap-2 transition-all duration-200 active:scale-98 cursor-pointer"
             >
-              <ArrowDownToLine className="w-4 h-4" />
-              Download Sekarang
+              <Layout className="w-4 h-4" />
+              Coba Demo
             </a>
           </div>
 
@@ -149,12 +149,12 @@ export default function Navbar() {
               })}
               <div className="pt-4 px-3">
                 <a
-                  href="#download"
+                  href="#fitur"
                   onClick={() => setIsOpen(false)}
                   className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
                 >
-                  <ArrowDownToLine className="w-4 h-4" />
-                  Download Sekarang
+                  <Layout className="w-4 h-4" />
+                  Coba Demo
                 </a>
               </div>
             </div>

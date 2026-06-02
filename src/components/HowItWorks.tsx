@@ -11,7 +11,7 @@ const STEPS: TimelineStep[] = [
   {
     step: 2,
     title: "Isi Saldo & Bayar Instan",
-    description: "Gunakan dompet digital SayurPay untuk melakukan pembayaran cashless pas belanjaan. Masukkan PIN keamanan Anda untuk verifikasi instan.",
+    description: "Gunakan dompet digital untuk melakukan pembayaran cashless pas belanjaan. Masukkan PIN keamanan Anda untuk verifikasi instan.",
   },
   {
     step: 3,

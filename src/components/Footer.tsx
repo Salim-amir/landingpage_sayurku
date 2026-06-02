@@ -45,41 +45,51 @@ export default function Footer() {
 
           {/* Quick links columns */}
           <div className="md:col-span-2 space-y-3.5">
-            <h5 className="text-white font-bold text-xs uppercase tracking-wider">Perusahaan</h5>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#" className="hover:text-green-500 transition-colors">Tentang Kami</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Kemitraan Petani</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Karir Lokal</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Press & Blog</a></li>
+            <h5 className="text-white font-bold text-xs uppercase tracking-wider">Tim Pengembang</h5>
+            <ul className="space-y-3 text-[11px] text-slate-400">
+              <li className="flex flex-col">
+                <span className="font-semibold text-slate-300">Almafarel Akbar Remizard</span>
+                <span className="text-[9px] opacity-75">NIM: 244107060019</span>
+              </li>
+              <li className="flex flex-col">
+                <span className="font-semibold text-slate-300">Liliyan Pramudita</span>
+                <span className="text-[9px] opacity-75">NIM: 244107060096</span>
+              </li>
+              <li className="flex flex-col">
+                <span className="font-semibold text-slate-300">Mohammad Febriansyah</span>
+                <span className="text-[9px] opacity-75">NIM: 244107060117</span>
+              </li>
+              <li className="flex flex-col">
+                <span className="font-semibold text-slate-300">Salim Amir</span>
+                <span className="text-[9px] opacity-75">NIM: 244107060085</span>
+              </li>
             </ul>
           </div>
 
           <div className="md:col-span-2 space-y-3.5">
             <h5 className="text-white font-bold text-xs uppercase tracking-wider">Layanan</h5>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#fitur" className="hover:text-green-500 transition-colors">SayurPay</a></li>
+            <ul className="space-y-2 text-xs text-slate-400">
               <li><a href="#fitur" className="hover:text-green-500 transition-colors">Katalog Sayur</a></li>
-              <li><a href="#fitur" className="hover:text-green-500 transition-colors">Pengiriman Kilat</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Grosir Dapur</a></li>
+              <li><a href="#fitur" className="hover:text-green-500 transition-colors">Dompet Digital</a></li>
+              <li><a href="#cara-kerja" className="hover:text-green-500 transition-colors">Pengiriman Cepat</a></li>
             </ul>
           </div>
 
           <div className="md:col-span-2 space-y-3.5">
-            <h5 className="text-white font-bold text-xs uppercase tracking-wider">Dukungan</h5>
-            <ul className="space-y-2 text-xs">
+            <h5 className="text-white font-bold text-xs uppercase tracking-wider">Informasi</h5>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li><a href="#cara-kerja" className="hover:text-green-500 transition-colors">Panduan Belanja</a></li>
               <li><a href="#faq" className="hover:text-green-500 transition-colors">Pertanyaan Umum</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Kebijakan Privasi</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Syarat & Ketentuan</a></li>
-              <li><a href="#" className="hover:text-green-500 transition-colors">Kontak Kami</a></li>
+              <li><a href="#fitur" className="hover:text-green-500 transition-colors">Coba Demo Web</a></li>
             </ul>
           </div>
 
           <div className="md:col-span-2 space-y-3.5">
             <h5 className="text-white font-bold text-xs uppercase tracking-wider">Alamat Hub</h5>
             <p className="text-xs text-slate-400 font-normal leading-relaxed">
-              Kuningan Central Hub No. 12,<br />
-              Kec. Setiabudi, Kota Jakarta Selatan,<br />
-              DKI Jakarta, 12920
+              Jl. Soekarno Hatta No.9,<br />
+              Jatimulyo, Kec. Lowokwaru,<br />
+              Kota Malang, Jawa Timur 65141
             </p>
           </div>
 

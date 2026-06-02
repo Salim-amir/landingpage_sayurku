@@ -7,20 +7,16 @@ import {
 import { Product } from "../types";
 
 const PLAYGROUND_PRODUCTS: Product[] = [
-  { id: "p1", name: "Bayam Organik Hidroponik", category: "sayur", price: 6500, unit: "ikat", image: "🥬", rating: 4.9, isFresh: true },
-  { id: "p2", name: "Tomat Ceri Hidroponik Lembang", category: "sayur", price: 14500, unit: "250g", image: "🍅", rating: 4.8, isFresh: true },
-  { id: "p3", name: "Wortel Orange Manis", category: "sayur", price: 9500, unit: "500g", image: "🥕", rating: 4.8, isFresh: false },
-  { id: "p4", name: "Mangga Harum Manis Matang", category: "buah", price: 24000, unit: "1kg", image: "🥭", rating: 4.9, isFresh: true },
-  { id: "p5", name: "Alpukat Mentega Istimewa", category: "buah", price: 29000, unit: "1kg", image: "🥑", rating: 4.7, isFresh: false },
-  { id: "p6", name: "Bawang Merah Brebes Premium", category: "bumbu", price: 18000, unit: "500g", image: "🧅", rating: 4.8, isFresh: true },
-  { id: "p7", name: "Jahe Merah Hangat", category: "bumbu", price: 11000, unit: "250g", image: "🪵", rating: 4.6, isFresh: false },
-  { id: "p8", name: "Tempe Premium Bungkus Daun", category: "dapur", price: 5000, unit: "papan", image: "🪵", rating: 4.9, isFresh: true },
+  { id: "p1", name: "Bayam Hijau", category: "sayur_hijau", price: 12000, unit: "250g", image: "🥬", rating: 4.8, isFresh: true },
+  { id: "p2", name: "Tomat Merah", category: "buah", price: 15000, unit: "500g", image: "🍅", rating: 4.7, isFresh: true },
+  { id: "p3", name: "Cabai Rawit", category: "bumbu", price: 18000, unit: "100g", image: "🌶️", rating: 4.8, isFresh: true },
+  { id: "p4", name: "Wortel Lokal", category: "umbi_umbian", price: 10500, unit: "500g", image: "🥕", rating: 4.9, isFresh: true },
 ];
 
 export default function ShoppingPlayground() {
   const [cart, setCart] = useState<{ [productId: string]: number }>({});
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "sayur" | "buah" | "bumbu" | "dapur">("all");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "sayur_hijau" | "buah" | "bumbu" | "umbi_umbian">("all");
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   // Cart total calculations
@@ -80,18 +76,18 @@ export default function ShoppingPlayground() {
               Eksplorasi Katalog Dapur Anda
             </h2>
             <p className="mt-3 text-base text-gray-600 font-normal">
-              Rasakan mulusnya navigasi belanja Sayurku langsung dari halaman ini. Pilih produk, kumpulkan diskon, dan simulasikan checkout SayurPay!
+              Rasakan mulusnya navigasi belanja Sayurku langsung dari halaman ini. Pilih produk, kumpulkan diskon, dan simulasikan checkout Dompet Digital!
             </p>
           </div>
 
           {/* Categories select pills with smooth horizontal swiping on mobile viewports */}
           <div className="flex gap-2 overflow-x-auto scrollbar-none pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
             {[
-              { id: "all", label: "Semua Kebutuhan" },
-              { id: "sayur", label: "🥬 Sayuran" },
-              { id: "buah", label: "🥑 Buah-Buahan" },
-              { id: "bumbu", label: "🧄 Bumbu Dapur" },
-              { id: "dapur", label: "🍳 Lauk Pauk" },
+              { id: "all", label: "Semua Produk" },
+              { id: "sayur_hijau", label: "Sayur Hijau" },
+              { id: "buah", label: "Buah" },
+              { id: "bumbu", label: "Bumbu" },
+              { id: "umbi_umbian", label: "Umbi-umbian" },
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -133,15 +129,7 @@ export default function ShoppingPlayground() {
 
                   {/* Image Badge Illustration */}
                   <div className="aspect-square w-full rounded-2xl bg-slate-50/70 group-hover:bg-green-50/50 transition-colors flex items-center justify-center text-5xl select-none relative mb-4">
-                    {product.image === "🥬" && <span>🥬</span>}
-                    {product.image === "🍅" && <span>🍅</span>}
-                    {product.image === "🥕" && <span>🥕</span>}
-                    {product.image === "🥭" && <span>🥭</span>}
-                    {product.image === "🥑" && <span>🥑</span>}
-                    {product.image === "🧄" && <span>🧄</span>}
-                    {product.image === "🌶️" && <span>🌶️</span>}
-                    {product.image === "🧅" && <span>🧅</span>}
-                    {product.image === "🪵" && <span className="text-4xl">🪵</span>}
+                    <span className={product.image === "🪵" ? "text-4xl" : ""}>{product.image}</span>
                     {product.isFresh && (
                       <span className="absolute bottom-3 left-3 bg-green-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md flex items-center gap-0.5 shadow-sm">
                         <Leaf className="w-2.5 h-2.5" /> FRESH
@@ -212,7 +200,7 @@ export default function ShoppingPlayground() {
                     </div>
                     <h4 className="font-extrabold text-gray-900 text-lg">Checkout Berhasil!</h4>
                     <p className="text-xs text-gray-500 mt-2">
-                      Terbaca melalui SayurPay. Tim gudang kami sedang memilah belanjaan organik segar Anda secara higienis!
+                      Terbaca melalui Dompet Digital. Tim gudang kami sedang memilah belanjaan organik segar Anda secara higienis!
                     </p>
                     <div className="mt-4 flex h-2.5 w-24 bg-gray-100 rounded-full overflow-hidden">
                       <div className="bg-green-600 animate-[pulse_1s_infinite] w-full rounded-full" />
@@ -278,7 +266,7 @@ export default function ShoppingPlayground() {
                     onClick={handleCheckoutSimulate}
                     className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-green-600/10 transition-all duration-300 transform active:scale-98 cursor-pointer"
                   >
-                    Bayar via SayurPay
+                    Bayar via Dompet Digital
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>

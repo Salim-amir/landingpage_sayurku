@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  category: "sayur" | "buah" | "bumbu" | "dapur";
+  category: "sayur" | "buah" | "bumbu" | "dapur" | "sayur_hijau" | "umbi_umbian";
   price: number;
   unit: string;
   image: string;
