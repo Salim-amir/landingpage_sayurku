@@ -102,7 +102,7 @@ export default function App() {
               >
                 <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight text-gray-950 leading-tight">
                   Solusi Cerdas Untuk <br className="hidden sm:inline" />
-                  <Typewriter phrases={typewriterPhrases} typingSpeed={100} deletingSpeed={50} delayBetween={2000} />
+                  <Typewriter phrases={typewriterPhrases} delayBetween={3000} />
                 </h1>
                 <p className="max-w-2xl mx-auto lg:mx-0 text-base md:text-lg text-gray-650 font-normal leading-relaxed">
                   Bawa kesegaran pasar buah, sayur organik pilihan, bumbu dapur tradisional, dan bermacam-macam kebutuhan masak sehat langsung di depan pintu rumah Anda tanpa repot keluar rumah. 100% Bergaransi Segar!

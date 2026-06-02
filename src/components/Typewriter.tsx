@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 interface TypewriterProps {
   phrases: string[];
@@ -9,52 +10,37 @@ interface TypewriterProps {
 
 export default function Typewriter({
   phrases,
-  typingSpeed = 100,
-  deletingSpeed = 50,
-  delayBetween = 2000,
+  delayBetween = 3000,
 }: TypewriterProps) {
-  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    const fullPhrase = phrases[currentPhraseIndex];
-
-    if (isDeleting) {
-      // Deleting process
-      timer = setTimeout(() => {
-        setCurrentText((prev) => prev.slice(0, -1));
-      }, deletingSpeed);
-    } else {
-      // Typing process
-      timer = setTimeout(() => {
-        setCurrentText((prev) => fullPhrase.slice(0, prev.length + 1));
-      }, typingSpeed);
-    }
-
-    // If fully typed, wait and then delete
-    if (!isDeleting && currentText === fullPhrase) {
-      timer = setTimeout(() => {
-        setIsDeleting(true);
-      }, delayBetween);
-    }
-
-    // If fully deleted, move to the next phrase
-    if (isDeleting && currentText === "") {
-      setIsDeleting(false);
-      setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
-    }
-
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed, deletingSpeed, delayBetween]);
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % phrases.length);
+    }, delayBetween);
+    return () => clearInterval(timer);
+  }, [phrases, delayBetween]);
 
   return (
-    <span className="relative">
-      <span className="text-green-600 font-bold drop-shadow-sm select-none">
-        {currentText}
-      </span>
-      <span className="absolute -right-1.5 md:-right-3 top-0 h-[92%] w-[2px] md:w-[3px] bg-green-600 animate-blink"></span>
+    <span className="inline-grid relative overflow-hidden align-bottom py-1 -my-1">
+      <AnimatePresence mode="popLayout">
+        <motion.span
+          key={index}
+          initial={{ y: "120%", opacity: 0, filter: "blur(10px)", rotateX: -30 }}
+          animate={{ y: "0%", opacity: 1, filter: "blur(0px)", rotateX: 0 }}
+          exit={{ y: "-120%", opacity: 0, filter: "blur(10px)", rotateX: 30 }}
+          transition={{ 
+            type: "spring",
+            stiffness: 120,
+            damping: 15,
+            mass: 1 
+          }}
+          className="col-start-1 row-start-1 bg-gradient-to-r from-green-600 via-[#25D366] to-teal-600 bg-clip-text text-transparent pb-1 pr-2"
+          style={{ transformOrigin: "center" }}
+        >
+          {phrases[index]}
+        </motion.span>
+      </AnimatePresence>
     </span>
   );
 }
