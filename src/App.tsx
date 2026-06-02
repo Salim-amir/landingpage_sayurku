@@ -118,12 +118,12 @@ export default function App() {
               >
                 {/* CTA "Download Sekarang" with App icon */}
                 <a
-                  href="#download"
+                  href="#fitur"
                   id="cta-hero"
                   className="w-full sm:w-auto px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold text-sm flex items-center justify-center gap-2.5 shadow-md shadow-green-600/15 transition-all duration-200 active:scale-98 cursor-pointer group"
                 >
-                  <ArrowDownToLine className="w-5 h-5 text-green-50 group-hover:translate-y-0.5 transition-transform" />
-                  Download Sekarang
+                  <Layout className="w-5 h-5 text-green-50 group-hover:scale-110 transition-transform" />
+                  Coba Demo Web
                 </a>
                 
                 {/* Alternative "Pelajari Fitur" button */}
