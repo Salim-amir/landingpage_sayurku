@@ -7,10 +7,14 @@ import {
 import { Product } from "../types";
 
 const PLAYGROUND_PRODUCTS: Product[] = [
-  { id: "p1", name: "Bayam Hijau", category: "sayur_hijau", price: 12000, unit: "250g", image: "🥬", rating: 4.8, isFresh: true },
-  { id: "p2", name: "Tomat Merah", category: "buah", price: 15000, unit: "500g", image: "🍅", rating: 4.7, isFresh: true },
-  { id: "p3", name: "Cabai Rawit", category: "bumbu", price: 18000, unit: "100g", image: "🌶️", rating: 4.8, isFresh: true },
-  { id: "p4", name: "Wortel Lokal", category: "umbi_umbian", price: 10500, unit: "500g", image: "🥕", rating: 4.9, isFresh: true },
+  { id: "1", name: "Bayam Hijau", category: "sayur_hijau", price: 12000, unit: "1 Ikat", image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=80", rating: 4.8, isFresh: true },
+  { id: "1b", name: "Kangkung Segar", category: "sayur_hijau", price: 10000, unit: "1 Ikat", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80", rating: 4.6, isFresh: true },
+  { id: "2", name: "Tomat Merah", category: "buah", price: 15000, unit: "500 Gram", image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80", rating: 4.7, isFresh: true },
+  { id: "2b", name: "Jeruk Manis", category: "buah", price: 25000, unit: "1 Kg", image: "https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=400&q=80", rating: 4.9, isFresh: true },
+  { id: "3", name: "Cabai Rawit", category: "bumbu", price: 18000, unit: "1 Ons", image: "https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?auto=format&fit=crop&w=400&q=80", rating: 4.8, isFresh: true },
+  { id: "3b", name: "Bawang Merah", category: "bumbu", price: 35000, unit: "250 Gram", image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=400&q=80", rating: 4.7, isFresh: true },
+  { id: "4", name: "Wortel Lokal", category: "umbi_umbian", price: 10500, unit: "500 Gram", image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=400&q=80", rating: 4.9, isFresh: true },
+  { id: "4b", name: "Kentang Dieng", category: "umbi_umbian", price: 16000, unit: "1 Kg", image: "https://images.unsplash.com/photo-1590165482129-1b8b27698780?auto=format&fit=crop&w=400&q=80", rating: 4.8, isFresh: true },
 ];
 
 export default function ShoppingPlayground() {
@@ -128,8 +132,12 @@ export default function ShoppingPlayground() {
                   </button>
 
                   {/* Image Badge Illustration */}
-                  <div className="aspect-square w-full rounded-2xl bg-slate-50/70 group-hover:bg-green-50/50 transition-colors flex items-center justify-center text-5xl select-none relative mb-4">
-                    <span className={product.image === "🪵" ? "text-4xl" : ""}>{product.image}</span>
+                  <div className="aspect-square w-full rounded-2xl bg-slate-50/70 group-hover:bg-green-50/50 transition-colors flex items-center justify-center select-none relative mb-4 overflow-hidden">
+                    {product.image.startsWith("http") ? (
+                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className={product.image === "🪵" ? "text-4xl" : ""}>{product.image}</span>
+                    )}
                     {product.isFresh && (
                       <span className="absolute bottom-3 left-3 bg-green-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md flex items-center gap-0.5 shadow-sm">
                         <Leaf className="w-2.5 h-2.5" /> FRESH
@@ -142,10 +150,9 @@ export default function ShoppingPlayground() {
                     <h4 className="font-bold text-gray-900 group-hover:text-green-700 transition-colors text-sm md:text-base line-clamp-1">
                       {product.name}
                     </h4>
-                    <p className="text-xs text-gray-400">Porsi {product.unit}</p>
+                    <p className="text-xs text-gray-400">/ {product.unit}</p>
                     <div className="flex justify-between items-center pt-2">
                       <span className="text-sm font-extrabold text-green-600">Rp {product.price.toLocaleString("id-ID")}</span>
-                      <span className="text-xs text-amber-500 font-bold">★ {product.rating}</span>
                     </div>
                   </div>
 
@@ -231,7 +238,13 @@ export default function ShoppingPlayground() {
                       return (
                         <div key={id} className="flex justify-between items-center text-xs">
                           <div className="flex items-center gap-2.5">
-                            <span className="text-lg">{p.image}</span>
+                            <span className="text-lg w-8 h-8 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
+                              {p.image.startsWith("http") ? (
+                                <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                              ) : (
+                                p.image
+                              )}
+                            </span>
                             <div>
                               <h5 className="font-bold text-gray-900 line-clamp-1">{p.name}</h5>
                               <p className="text-[10px] text-gray-400">Rp {p.price.toLocaleString("id-ID")} x {qty}</p>

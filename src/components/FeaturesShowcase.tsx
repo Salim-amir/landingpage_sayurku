@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   Search, ShoppingCart, Wallet, Truck, 
@@ -9,14 +9,14 @@ import { Product } from "../types";
 
 // Mock products for the interactive shopping preview
 const SAMPLE_PRODUCTS: Product[] = [
-  { id: "1", name: "Bayam Hijau", category: "sayur_hijau", price: 12000, unit: "250g", image: "🥬", rating: 4.8, isFresh: true },
-  { id: "1b", name: "Kangkung Segar", category: "sayur_hijau", price: 10000, unit: "250g", image: "🥬", rating: 4.6, isFresh: true },
-  { id: "2", name: "Tomat Merah", category: "buah", price: 15000, unit: "500g", image: "🍅", rating: 4.7, isFresh: true },
-  { id: "2b", name: "Jeruk Manis", category: "buah", price: 25000, unit: "1kg", image: "🍊", rating: 4.9, isFresh: true },
-  { id: "3", name: "Cabai Rawit", category: "bumbu", price: 18000, unit: "100g", image: "🌶️", rating: 4.8, isFresh: true },
-  { id: "3b", name: "Bawang Merah", category: "bumbu", price: 35000, unit: "500g", image: "🧅", rating: 4.7, isFresh: true },
-  { id: "4", name: "Wortel Lokal", category: "umbi_umbian", price: 10500, unit: "500g", image: "🥕", rating: 4.9, isFresh: true },
-  { id: "4b", name: "Kentang Dieng", category: "umbi_umbian", price: 16000, unit: "1kg", image: "🥔", rating: 4.8, isFresh: true },
+  { id: "1", name: "Bayam Hijau", category: "sayur_hijau", price: 12000, unit: "1 Ikat", image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=80", rating: 4.8, isFresh: true },
+  { id: "1b", name: "Kangkung Segar", category: "sayur_hijau", price: 10000, unit: "1 Ikat", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80", rating: 4.6, isFresh: true },
+  { id: "2", name: "Tomat Merah", category: "buah", price: 15000, unit: "500 Gram", image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80", rating: 4.7, isFresh: true },
+  { id: "2b", name: "Jeruk Manis", category: "buah", price: 25000, unit: "1 Kg", image: "https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=400&q=80", rating: 4.9, isFresh: true },
+  { id: "3", name: "Cabai Rawit", category: "bumbu", price: 18000, unit: "1 Ons", image: "https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?auto=format&fit=crop&w=400&q=80", rating: 4.8, isFresh: true },
+  { id: "3b", name: "Bawang Merah", category: "bumbu", price: 35000, unit: "250 Gram", image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=400&q=80", rating: 4.7, isFresh: true },
+  { id: "4", name: "Wortel Lokal", category: "umbi_umbian", price: 10500, unit: "500 Gram", image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=400&q=80", rating: 4.9, isFresh: true },
+  { id: "4b", name: "Kentang Dieng", category: "umbi_umbian", price: 16000, unit: "1 Kg", image: "https://images.unsplash.com/photo-1590165482129-1b8b27698780?auto=format&fit=crop&w=400&q=80", rating: 4.8, isFresh: true },
 ];
 
 export default function FeaturesShowcase() {
@@ -26,6 +26,21 @@ export default function FeaturesShowcase() {
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState<{ [productId: string]: number }>({});
   const [categoryFilter, setCategoryFilter] = useState<"all" | "sayur_hijau" | "buah" | "bumbu" | "umbi_umbian">("all");
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  // Convert vertical scroll to horizontal scroll on category filter bar
+  useEffect(() => {
+    const el = categoryScrollRef.current;
+    if (!el) return;
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > 0) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [activeTab]);
 
   // Sub-states: Dompet Digital Mockup
   const [walletBalance, setWalletBalance] = useState(9834000);
@@ -390,7 +405,10 @@ export default function FeaturesShowcase() {
                       </div>
 
                       {/* Category filters */}
-                      <div className="flex gap-2 pb-1 overflow-x-auto scrollbar-none mt-3">
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex gap-2 pb-1 overflow-x-auto scrollbar-none mt-3"
+                      >
                         {[
                           { id: "all", label: "Semua Produk" },
                           { id: "sayur_hijau", label: "Sayur Hijau" },
@@ -420,8 +438,12 @@ export default function FeaturesShowcase() {
                         {filteredProducts.map((p) => {
                           return (
                             <div key={p.id} className="bg-white rounded-[16px] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col">
-                              <div className="h-[90px] w-full bg-gray-100 flex items-center justify-center text-5xl relative">
-                                {p.image}
+                              <div className="h-[90px] w-full bg-gray-100 flex items-center justify-center text-5xl relative overflow-hidden">
+                                {p.image.startsWith("http") ? (
+                                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                                ) : (
+                                  p.image
+                                )}
                               </div>
                               <div className="p-2.5 flex flex-col justify-between flex-1">
                                 <div>
